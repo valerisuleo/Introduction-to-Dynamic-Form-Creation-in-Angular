@@ -1,0 +1,12 @@
+<ng-container [formGroup]="formGroup">
+    <div class="form-group form-check mb-3">
+        <input
+            [formControlName]="props.name"
+            type="checkbox"
+            class="form-check-input"
+        />
+        <label class="form-check-label" for="checkbox">
+            {{ props.label }}
+        </label>
+    </div>
+</ng-container>

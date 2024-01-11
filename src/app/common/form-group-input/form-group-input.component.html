@@ -1,0 +1,18 @@
+<ng-container [formGroup]="formGroup">
+    <div class="form-group mb-4">
+        <label [for]="props.name">{{ props.label }}</label>
+        <input
+            [formControlName]="props.name"
+            [type]="props.type"
+            class="form-control p-3"
+        />
+        <ng-container *ngIf="input?.touched && input?.invalid">
+            <div
+                *ngFor="let error of input?.errors | keyvalue"
+                class="alert alert-danger"
+            >
+                {{ error.value.message }}
+            </div>
+        </ng-container>
+    </div>
+</ng-container>

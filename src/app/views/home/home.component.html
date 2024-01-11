@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <bootstrap-form [props]="formGroup">
+            <ng-container *ngFor="let props of formControllers">
+
+                <ng-container *ngIf="props.staticContent">
+                    <ng-container *ngFor="let content of props.staticContent">
+                        <h3
+                            *ngIf="content.type === 'header'"
+                            class="mt-5"
+                        >
+                            {{ content.innerText }}
+                        </h3>
+                        <p *ngIf="content.type === 'paragraph'" class="mb-4">
+                            {{ content.innerText }}
+                        </p>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container [ngSwitch]="props.type">
+                    <bootstrap-form-group-input
+                        *ngSwitchCase="'text'"
+                        [props]="props"
+                        [formGroup]="formGroup"
+                    ></bootstrap-form-group-input>
+
+                    <bootstrap-form-group-input
+                        *ngSwitchCase="'date'"
+                        [props]="props"
+                        [formGroup]="formGroup"
+                    ></bootstrap-form-group-input>
+
+                    <!-- Example for select -->
+                    <bootstrap-form-group-select
+                        *ngSwitchCase="'select'"
+                        [formGroup]="formGroup"
+                        [props]="props"
+                    ></bootstrap-form-group-select>
+
+                    <!-- Example for password -->
+                    <bootstrap-form-group-input
+                        *ngSwitchCase="'password'"
+                        [props]="props"
+                        [formGroup]="formGroup"
+                    ></bootstrap-form-group-input>
+
+                    <!-- Example for checkbox -->
+                    <bootstrap-form-group-checkbox
+                        *ngSwitchCase="'checkbox'"
+                        [formGroup]="formGroup"
+                        [props]="props"
+                    ></bootstrap-form-group-checkbox>
+                </ng-container>
+            </ng-container>
+
+            <button
+                [disabled]="!formGroup.valid"
+                type="submit"
+                class="btn btn-primary mt-5"
+                (click)="submit()"
+            >
+                Submit
+            </button>
+        </bootstrap-form>
+    </div>
+</div>
+
+<div class="row my-5">
+    <div class="col">
+        {{ formGroup.value | json }}
+    </div>
+</div>
